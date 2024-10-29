@@ -5,23 +5,20 @@
                 <div class="header-to-main d-none d-sm-flex">
                     <div class="link-text">
                         <span><img src="assets/imgs/icons/call.png" alt=""></span>
-                        <a href="tel:+380961381876">+380961381876</a>
+                        <a href="tel:+380961381876">+99890 324 79 99</a>
                     </div>
                     <div class="header-top-notice d-none d-lg-block">
-                        <p>TAKE CARE OF YOUR Health <span class="text-white">25% OFF</span> USE CODE “ DOFIX03 ”</p>
+                        <p>TAKE CARE OF YOUR Health <span class="text-white">25% OFF</span> USE CODE “ MM25 ”</p>
                     </div>
                     <div class="tp-header-top-menu d-flex align-items-center justify-content-end">
                         <div class="header-lang-item header-lang">
                             <span class="header-lang-toggle text-white" id="header-lang-toggle">English</span>
                             <ul class="">
                                 <li>
-                                    <a class="furniture-clr-hover" href="#">Spanish</a>
+                                    <a class="furniture-clr-hover" href="#">O'zbekcha</a>
                                 </li>
                                 <li>
                                     <a class="furniture-clr-hover" href="#">Russian</a>
-                                </li>
-                                <li>
-                                    <a class="furniture-clr-hover" href="#">Portuguese</a>
                                 </li>
                             </ul>
                         </div>
@@ -29,17 +26,12 @@
                             <span class="header-currency-toggle text-white" id="header-currency-toggle">USD</span>
                             <ul>
                                 <li>
-                                    <a class="furniture-clr-hover" href="#">EUR</a>
+                                    <a class="furniture-clr-hover" href="#">SUM</a>
                                 </li>
                                 <li>
-                                    <a class="furniture-clr-hover" href="#">CHF</a>
+                                    <a class="furniture-clr-hover" href="#">RUB</a>
                                 </li>
-                                <li>
-                                    <a class="furniture-clr-hover" href="#">GBP</a>
-                                </li>
-                                <li>
-                                    <a class="furniture-clr-hover" href="#">KWD</a>
-                                </li>
+
                             </ul>
                         </div>
                         <div class="header-lang-item tp-header-setting">
@@ -69,7 +61,7 @@
                     <div class="header-main-4">
                         <div class="header-left">
                             <div class="header-logo">
-                                <a href="index.html">
+                                <a href="{{ route('home') }}">
                                     <img src="assets/imgs/furniture/logo/logo.svg" alt="logo not found">
                                 </a>
                             </div>
@@ -78,44 +70,28 @@
                                     <nav id="mobile-menu">
                                         <ul>
                                             <li>
-                                                <a href="{{ route('pages.index') }}">Home</a>
+                                                <a href="{{ route('home') }}">Home</a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('pages.about') }}">About</a>
-                                            </li>
-                                            <li class="has-dropdown">
-                                                <a href="product.html">Shop</a>
-                                                <ul class="submenu">
-                                                    <li><a href="product.html">Product</a></li>
-                                                    <li><a href="product-details.html">Product Details</a></li>
-                                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                                    <li><a href="cart.html">Cart</a></li>
-                                                    <li><a href="checkout.html">Checkout</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-dropdown">
-                                                <a href="about.html">Pages</a>
-                                                <ul class="submenu">
-                                                    <li><a href="about.html">About Us</a></li>
-                                                    <li><a href="store.html">Find a Store</a></li>
-                                                    <li><a href="portfolio.html">Portfolio</a></li>
-                                                    <li><a href="portfolio-details.html">Portfolio Details</a></li>
-                                                    <li><a href="faq.html">Faq</a></li>
-                                                    <li><a href="coming-soon.html">Coming Soon</a></li>
-                                                    <li><a href="error.html">404</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-dropdown">
-                                                <a href="blog.html">Blog</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Blog Default</a></li>
-                                                    <li><a href="blog-grid.html">Blog Grid</a></li>
-                                                    <li><a href="blog-details.html">Blog Details</a></li>
-                                                </ul>
+                                                <a href="{{ route('about') }}">About</a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('pages.contact') }}">Contact</a>
+                                                <a href="">Categories</a>
                                             </li>
+                                            <li>
+                                                <a href="">All Product</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('contact') }}">Contact</a>
+                                            </li>
+{{--                                            <li class="has-dropdown">--}}
+{{--                                                <a href="blog.html">Blog</a>--}}
+{{--                                                <ul class="submenu">--}}
+{{--                                                    <li><a href="blog.html">Blog Default</a></li>--}}
+{{--                                                    <li><a href="blog-grid.html">Blog Grid</a></li>--}}
+{{--                                                    <li><a href="blog-details.html">Blog Details</a></li>--}}
+{{--                                                </ul>--}}
+{{--                                            </li>--}}
                                         </ul>
                                     </nav>
                                 </div>

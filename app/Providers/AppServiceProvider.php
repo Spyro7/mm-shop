@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer('*', function ($view) {
+            $routeName = Route::currentRouteName();
+
+            $pageTitles = [
+                'home' => 'Home',
+                'about' => 'About Us',
+                'contact' => 'Contact Us',
+            ];
+
+            $pageTitle = $pageTitles[$routeName] ?? 'Dashboard';
+
+            $view->with('pageTitle', $pageTitle);
+        });
     }
 }

@@ -81,7 +81,7 @@
             <div class="footer-copyright-wrapper">
                 <div class="footer-copyright-text">
                     <p class="mb-0">© All Copyright 2024 by <a target="_blank" class="furniture-clr-hover"
-                                                               href="#">Addina</a></p>
+                                                               href="#">Mirzabek</a></p>
                 </div>
                 <div class="footer-payment d-flex align-items-center gap-2">
                     <div class="footer-payment-item mb-0">
