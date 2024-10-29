@@ -114,8 +114,8 @@
                             </div>
                             <div class="offcanvas__contact-text">
                                 <a target="_blank"
-                                   href="https://www.google.com/maps/place/Dhaka/@23.7806207,90.3492859,12z/data=!3m1!4b1!4m5!3m4!1s0x3755b8b087026b81:0x8fa563bbdd5904c2!8m2!3d23.8104753!4d90.4119873">12/A,
-                                    Mirnada City Tower, NYC</a>
+                                   href="https://maps.app.goo.gl/Ut7iHutmUCnkM42d8">
+                                    12/A, Yunusobod 4, Tashkent</a>
                             </div>
                         </li>
                         <li class="d-flex align-items-center">
@@ -123,7 +123,7 @@
                                 <i class="far fa-phone"></i>
                             </div>
                             <div class="offcanvas__contact-text">
-                                <a href="tel:+088889797697">+088889797697</a>
+                                <a href="tel:+088889797697">+99890 324 79 99</a>
                             </div>
                         </li>
                         <li class="d-flex align-items-center">

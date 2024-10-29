@@ -12,13 +12,13 @@
                     </div>
                     <div class="tp-header-top-menu d-flex align-items-center justify-content-end">
                         <div class="header-lang-item header-lang">
-                            <span class="header-lang-toggle text-white" id="header-lang-toggle">English</span>
+                            <span class="header-lang-toggle text-white" id="header-lang-toggle">En</span>
                             <ul class="">
                                 <li>
-                                    <a class="furniture-clr-hover" href="#">O'zbekcha</a>
+                                    <a class="furniture-clr-hover" href="#">Uz</a>
                                 </li>
                                 <li>
-                                    <a class="furniture-clr-hover" href="#">Russian</a>
+                                    <a class="furniture-clr-hover" href="#">Ru</a>
                                 </li>
                             </ul>
                         </div>
@@ -82,16 +82,11 @@
                                                 <a href="">All Product</a>
                                             </li>
                                             <li>
+                                                <a href="">Blog</a>
+                                            </li>
+                                            <li>
                                                 <a href="{{ route('contact') }}">Contact</a>
                                             </li>
-{{--                                            <li class="has-dropdown">--}}
-{{--                                                <a href="blog.html">Blog</a>--}}
-{{--                                                <ul class="submenu">--}}
-{{--                                                    <li><a href="blog.html">Blog Default</a></li>--}}
-{{--                                                    <li><a href="blog-grid.html">Blog Grid</a></li>--}}
-{{--                                                    <li><a href="blog-details.html">Blog Details</a></li>--}}
-{{--                                                </ul>--}}
-{{--                                            </li>--}}
                                         </ul>
                                     </nav>
                                 </div>
