@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
+            $table->boolean('status')->default(1);
             $table->timestamps();
 
             $table->foreign('parent_id')->references('id')->on('categories')->onDelete('set null');

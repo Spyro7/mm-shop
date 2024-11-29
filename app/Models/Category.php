@@ -6,11 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $guarded = false;
+    protected $fillable = [
+        'name',
+        'slug',
+        'description',
+        'parent_id',
+        'status',
+        'image',
+    ];
 
-    protected $table = 'category';
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
 
-    public function products(){
+    public function products()
+    {
         return $this->hasMany(Product::class);
     }
 }
