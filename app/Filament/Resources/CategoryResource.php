@@ -137,6 +137,10 @@ class CategoryResource extends Resource
             //
         ];
     }
+    public static function getNavigationSort(): ?int
+    {
+        return 2;
+    }
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();

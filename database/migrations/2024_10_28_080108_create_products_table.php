@@ -30,7 +30,7 @@ return new class extends Migration
             $table->json('images')->nullable();
             $table->decimal('rating', 3, 2)->default(0);
             $table->integer('reviews')->default(0);
-            $table->boolean('status')->default(true);
+            $table->boolean('status')->default(1);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
