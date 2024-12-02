@@ -6,6 +6,7 @@ use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -98,8 +99,28 @@ class CategoryResource extends Resource
                     ->boolean(),
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make('status_is_active')
+                    ->query(fn (Builder $query) => $query->where('status', '1')),
+                Tables\Filters\Filter::make('status_inactive')
+                    ->query(fn (Builder $query) => $query->where('status', '0')),
+                Tables\Filters\Filter::make('created_at')
+                    ->form([
+                        DatePicker::make('created_from'),
+                        DatePicker::make('created_until'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['created_from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            )
+                            ->when(
+                                $data['created_until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            );
+                    })
             ])
+
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
@@ -115,6 +136,10 @@ class CategoryResource extends Resource
         return [
             //
         ];
+    }
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 
     public static function getPages(): array
