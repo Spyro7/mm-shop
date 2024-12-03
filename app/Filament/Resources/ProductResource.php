@@ -17,7 +17,7 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -26,38 +26,30 @@ class ProductResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('slug')
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\Textarea::make('description')
                     ->columnSpanFull(),
+                Forms\Components\TextInput::make('specifications'),
                 Forms\Components\TextInput::make('price')
                     ->required()
                     ->numeric()
                     ->prefix('$'),
                 Forms\Components\TextInput::make('discounted_price')
                     ->numeric(),
+                Forms\Components\TextInput::make('shipping')
+                    ->numeric(),
                 Forms\Components\TextInput::make('category_id')
                     ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('brand_id')
                     ->numeric(),
                 Forms\Components\TextInput::make('stock_quantity')
                     ->required()
                     ->numeric()
                     ->default(0),
-                Forms\Components\TextInput::make('sku')
-                    ->label('SKU')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('width')
-                    ->numeric(),
-                Forms\Components\TextInput::make('height')
-                    ->numeric(),
-                Forms\Components\TextInput::make('depth')
-                    ->numeric(),
-                Forms\Components\TextInput::make('material')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('color')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('weight')
-                    ->numeric(),
-                Forms\Components\TextInput::make('brand_id')
-                    ->numeric(),
+                Forms\Components\TextInput::make('color'),
                 Forms\Components\TextInput::make('images'),
                 Forms\Components\TextInput::make('rating')
                     ->required()
@@ -78,38 +70,24 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('slug')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('price')
                     ->money()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('discounted_price')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('shipping')
+                    ->numeric()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('category_id')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('stock_quantity')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sku')
-                    ->label('SKU')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('width')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('height')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('depth')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('material')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('color')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('weight')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('brand_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('stock_quantity')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('rating')
@@ -147,10 +125,6 @@ class ProductResource extends Resource
         return [
             //
         ];
-    }
-    public static function getNavigationSort(): ?int
-    {
-        return 4;
     }
 
     public static function getPages(): array
