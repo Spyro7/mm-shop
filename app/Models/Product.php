@@ -15,7 +15,10 @@ class Product extends Model
     public function brand(){
         return $this->belongsTo(Brand::class);
     }
-
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'product_tag');
+    }
     public function reviews(){
         return $this->hasMany(ProductReview::class);
     }
