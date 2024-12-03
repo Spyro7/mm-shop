@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $guarded = false;
+    protected $casts = [
+        'images' => 'array',
+        'specifications' => 'array',
+        'color' => 'array',
+    ];
 
     public function category(){
         return $this->belongsTo(Category::class);
