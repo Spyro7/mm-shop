@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\BrandResource\Pages;
+namespace App\Filament\Resources\ProductResource\Pages;
 
-use App\Filament\Resources\BrandResource;
+use App\Filament\Resources\ProductResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 
-class ViewBrand extends ViewRecord
+class ViewProduct extends ViewRecord
 {
-    protected static string $resource = BrandResource::class;
+    protected static string $resource = ProductResource::class;
 
     protected function getHeaderActions(): array
     {
@@ -16,7 +16,7 @@ class ViewBrand extends ViewRecord
             Actions\EditAction::make(),
             Actions\Action::make('Cancel')
                 ->color('gray')
-                ->url('/admin/brands'),
+                ->url('/admin/products'),
         ];
     }
 }

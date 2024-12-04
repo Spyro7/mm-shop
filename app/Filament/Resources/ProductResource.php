@@ -26,7 +26,7 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
 
     public static function form(Form $form): Form
     {
@@ -72,7 +72,7 @@ class ProductResource extends Resource
                             ->required()
                             ->multiple()
                             ->maxSize(1024)
-                            ->directory('products')
+                            ->directory('product_images')
                             ->maxFiles(6)
                             ->minFiles(1)
                             ->panelLayout('grid')
@@ -82,22 +82,29 @@ class ProductResource extends Resource
                     ]),
                 ])->columnSpan(2),
                 Group::make()->schema([
-                    Forms\Components\Section::make('Product price details')->schema([
-                        Forms\Components\TextInput::make('price')
-                            ->required()
+                    Forms\Components\Section::make('Product details')->schema([
+                        TextInput::make('price')
+                            ->label('Price')
                             ->numeric()
-                            ->prefix('$')
-                            ->default(0),
-                        Forms\Components\TextInput::make('discounted_price')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('shipping')
-                            ->numeric(),
-                    ])->columnSpan(1),
-                    Section::make('Product details')->schema([
+                            ->required()
+                            ->suffix('USD'),
+
+                        TextInput::make('discounted_price')
+                            ->label('Discounted Price')
+                            ->numeric()
+                            ->suffix('USD')
+                            ->placeholder('Optional'),
+                        TextInput::make('shipping')
+                            ->label('Shipping Cost')
+                            ->numeric()
+                            ->suffix('USD')
+                            ->placeholder('Enter shipping cost'),
                         Forms\Components\TextInput::make('stock_quantity')
                             ->required()
                             ->numeric()
                             ->default(0),
+                    ])->columnSpan(1),
+                    Section::make('Product colors')->schema([
                         Forms\Components\Repeater::make('color')
                             ->label('Colors')
                             ->schema([
@@ -105,12 +112,6 @@ class ProductResource extends Resource
                                     ->label('Color')
                             ])
                             ->collapsible(),
-                        Forms\Components\TextInput::make('rating')
-                            ->numeric()
-                            ->default(0),
-                        Forms\Components\TextInput::make('reviews')
-                            ->numeric()
-                            ->default(0),
                     ])->columnSpan(1),
                     Section::make('Product status')->schema([
                         Forms\Components\Toggle::make('is_active')
@@ -131,41 +132,42 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('images')
+                ->limit(1),
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
+                    ->label('Product name')
+                    ->limit(40)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
                     ->money()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('discounted_price')
+                    ->label('Discount')
                     ->numeric()
+                    ->money()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('shipping')
                     ->numeric()
+                    ->money()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('category_id')
+                Tables\Columns\TextColumn::make('category.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('brand_id')
+                Tables\Columns\TextColumn::make('brand.name')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('stock_quantity')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('rating')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('reviews')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('Quantity'),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('on_sale')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_featured')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->boolean(),
                 Tables\Columns\IconColumn::make('in_stock')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -180,12 +182,16 @@ class ProductResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make()
+                        ->color('primary'),
+                    Tables\Actions\ViewAction::make()
+                        ->color('info'),
+                    Tables\Actions\DeleteAction::make()
+                ])
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
@@ -195,12 +201,17 @@ class ProductResource extends Resource
             //
         ];
     }
+    public static function getNavigationSort(): ?int
+    {
+        return 3;
+    }
 
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListProducts::route('/'),
             'create' => Pages\CreateProduct::route('/create'),
+            'view' => Pages\ViewProduct::route('/{record}'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }

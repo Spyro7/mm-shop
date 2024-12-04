@@ -85,13 +85,11 @@ class CategoryResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime('H:i:s d.m.y')
-                    ->searchable()
+                    ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime('H:i:s d.m.y')
-                    ->searchable()
+                    ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\IconColumn::make('status')
@@ -122,12 +120,13 @@ class CategoryResource extends Resource
             ])
 
             ->actions([
+                Tables\Actions\ViewAction::make()
+                    ->color('info'),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\BulkActionGroup::make([
-                ]),
             ]);
     }
 

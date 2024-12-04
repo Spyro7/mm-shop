@@ -25,8 +25,6 @@ return new class extends Migration
             $table->integer('stock_quantity')->default(0);
             $table->json('color')->nullable();
             $table->json('images')->nullable();
-            $table->decimal('rating', 3, 2)->default(0);
-            $table->integer('reviews')->default(0);
             $table->boolean('is_active')->default(1);
             $table->boolean('on_sale')->default(0);
             $table->boolean('is_featured')->default(0);
