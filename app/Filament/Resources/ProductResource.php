@@ -86,12 +86,14 @@ class ProductResource extends Resource
                         TextInput::make('price')
                             ->label('Price')
                             ->numeric()
+                            ->minValue(0)
                             ->required()
                             ->suffix('USD'),
-
                         TextInput::make('discount_percentage')
                             ->label('Discount (%)')
                             ->numeric()
+                            ->minValue(0)
+                            ->maxValue(100)
                             ->suffix('%')
                             ->reactive()
                             ->afterStateUpdated(function ($state, callable $set, callable $get) {
@@ -113,11 +115,13 @@ class ProductResource extends Resource
                         TextInput::make('shipping')
                             ->label('Shipping Cost')
                             ->numeric()
+                            ->minValue(0)
                             ->suffix('USD')
                             ->placeholder('Enter shipping cost'),
                         Forms\Components\TextInput::make('stock_quantity')
                             ->required()
                             ->numeric()
+                            ->minValue(0)
                             ->reactive()
                             ->afterStateUpdated(function ($state, callable $set) {
                                 $set('in_stock', $state > 0);
@@ -224,7 +228,12 @@ class ProductResource extends Resource
     {
         return 3;
     }
-
+    public function getNumericInputAttributes()
+    {
+        return [
+            'style' => 'appearance: none; -moz-appearance: none; -webkit-appearance: none; padding-right: 20px;',
+        ];
+    }
     public static function getPages(): array
     {
         return [
