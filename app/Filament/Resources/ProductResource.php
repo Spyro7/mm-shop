@@ -89,11 +89,27 @@ class ProductResource extends Resource
                             ->required()
                             ->suffix('USD'),
 
+                        TextInput::make('discount_percentage')
+                            ->label('Discount (%)')
+                            ->numeric()
+                            ->suffix('%')
+                            ->reactive()
+                            ->afterStateUpdated(function ($state, callable $set, callable $get) {
+                                $price = $get('price');
+                                if ($price && $state) {
+                                    $discountedPrice = $price - ($price * $state / 100);
+                                    $set('discounted_price', round($discountedPrice, 2));
+                                }
+                            }),
+
                         TextInput::make('discounted_price')
                             ->label('Discounted Price')
                             ->numeric()
                             ->suffix('USD')
-                            ->placeholder('Optional'),
+                            ->dehydrated()
+                            ->readOnly()
+                            ->disabled(false),
+
                         TextInput::make('shipping')
                             ->label('Shipping Cost')
                             ->numeric()
@@ -102,7 +118,10 @@ class ProductResource extends Resource
                         Forms\Components\TextInput::make('stock_quantity')
                             ->required()
                             ->numeric()
-                            ->default(0),
+                            ->reactive()
+                            ->afterStateUpdated(function ($state, callable $set) {
+                                $set('in_stock', $state > 0);
+                            }),
                     ])->columnSpan(1),
                     Section::make('Product colors')->schema([
                         Forms\Components\Repeater::make('color')
