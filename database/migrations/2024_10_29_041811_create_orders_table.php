@@ -13,13 +13,17 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->decimal('total_price', 12, 2)->nullable();
-            $table->string('status')->default('pending');
-            $table->string('shipping_address')->nullable();
+            $table->foreignID('user_id')->constrained('users')->cascadeOnDelete();
+            $table->decimal('grand_total', 15, 2)->nullable()->default(0);
+            $table->decimal('discount', 15, 2)->nullable();
+            $table->decimal('tax', 15, 2)->nullable();
+            $table->decimal('shipping', 15, 2)->nullable()->default(0);
+            $table->string('shipping_method')->nullable();
             $table->string('payment_method')->nullable();
-            $table->string('payment_status')->default('pending');
-            $table->timestamp('ordered_at')->useCurrent();
+            $table->string('payment_status')->nullable();
+            $table->enum('status', ['new', 'processing', 'shipped', 'delivered', 'cancelled'])->default('new');
+            $table->string('currency')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

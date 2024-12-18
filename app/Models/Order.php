@@ -9,9 +9,9 @@ class Order extends Model
     protected $guarded = false;
     protected $table = 'orders';
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function items(){
@@ -20,5 +20,10 @@ class Order extends Model
 
     public function payment(){
         return $this->hasOne(Payment::class);
+    }
+
+    public function address()
+    {
+        return $this->hasOne(Address::class);
     }
 }
